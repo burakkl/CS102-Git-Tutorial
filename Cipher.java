@@ -1,4 +1,4 @@
-// This class is used for encrypting or decrypting strings using character mapping
+
 //burak
 public class Cipher {
     // Strings for keeping the alphabets, one for the original letters and the other
@@ -17,7 +17,7 @@ public class Cipher {
 
         // for all chars in the input string
         for (int i = 0; i < inputString.length(); i++) {
-
+            outputString += replaceChar(inputString.charAt(i), true);
         }
 
         return outputString;
@@ -28,7 +28,9 @@ public class Cipher {
         // output string will be collected in this variable, one char at a time
         String outputString = "";
 
-        replaceChar('a', true);
+        for (int i = 0; i < inputString.length(); i++) {
+            outputString += replaceChar(inputString.charAt(i), false);
+        }
 
         return outputString;
     }
@@ -44,7 +46,12 @@ public class Cipher {
         if (isEncrypt) {
             for (int i = 0; i < ORIGINAL_ALPHABET.length(); i++) {
                 if (ORIGINAL_ALPHABET.charAt(i) == inputChar) {
-
+                    int index = ORIGINAL_ALPHABET.indexOf(inputChar);
+                    if (index != -1) {
+                        return CIPHER_ALPHABET.charAt(index);
+                    } else {
+                        return inputChar;
+                    }
                 }
             }
         } else {
